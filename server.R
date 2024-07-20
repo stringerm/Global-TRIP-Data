@@ -18,7 +18,12 @@ function(input, output) {
                 y = ~trip_score, type="box", 
                 color = ~e_regionpol_6C
                 ) %>%
-        layout(title = "TRIP Score by Region",
+        layout(title = paste0("TRIP Score by Region - ",
+                              as.character(input$boxyear),
+                              "<br>",
+                              "Government Type: ",
+                              input$boxregime),
+               
                xaxis = list(title="Region"),
                yaxis = list(title="TRIP Score", 
                             range = c(0,13)),
