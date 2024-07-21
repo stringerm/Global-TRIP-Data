@@ -2,6 +2,7 @@ library(ggplot2)
 library(dplyr)
 library(plotly)
 library(shiny)
+dat <- read.csv("replication.csv")
 
 # Define UI for application that draws a histogram
 fluidPage(
@@ -30,16 +31,24 @@ fluidPage(
                                     "Electoral Autocracy",
                                     "Closed Autocracy"
                         ), 
+                        selected="All"),
+            
+            selectInput(inputId = "region", 
+                        label="Region:", 
+                        choices = c("All",
+                                    sort(unique(dat$e_regionpol_6C))
+                        ), 
                         selected="All")
             
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
-            plotlyOutput("boxPlot"),
-            br(),
-            plotlyOutput("globalLine")
+            plotlyOutput("boxPlot")
         )
-    )
+        
+    ),
+    column(5,plotlyOutput("barPlot")),
+    column(7,plotlyOutput("globalLine"))
 )
 
